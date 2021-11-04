@@ -38,7 +38,7 @@ public class Pizza {
     }
 
     public void addTopping(Topping topping) {
-        this.toppings.add(topping);
+            this.toppings.add(topping);
     }
 
     public double getOverallCalories() {

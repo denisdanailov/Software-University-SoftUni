@@ -13,14 +13,14 @@ public class Topping {
         if (weight > 0 && weight <= 50) {
             this.weight = weight;
         } else {
-            throw new IllegalArgumentException(String.format("%s weight should be in the range [1..50].%n", this.toppingType));
+            throw new IllegalArgumentException(String.format("%s weight should be in the range [1..50].", this.toppingType));
         }
     }
 
     private void setToppingType(String toppingType) {
         if (!toppingType.equals("Meat") && !toppingType.equals("Veggies") &&
                 !toppingType.equals("Cheese") && !toppingType.equals("Sauce")) {
-            throw new IllegalArgumentException(String.format("Cannot place %s on top of your pizza.%n", toppingType));
+            throw new IllegalArgumentException(String.format("Cannot place %s on top of your pizza.", toppingType));
         } else {
             this.toppingType = toppingType;
         }
