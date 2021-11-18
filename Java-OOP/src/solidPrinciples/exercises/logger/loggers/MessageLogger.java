@@ -42,4 +42,14 @@ public class MessageLogger implements Logger {
     public void logFatal(String time, String message) {
         log(time, message, ReportLevel.FATAL);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder strBuild = new StringBuilder();
+        strBuild.append("Logger info").append(System.lineSeparator());
+        for (Appender appender : appenders) {
+            strBuild.append(appender).append(System.lineSeparator());
+        }
+        return strBuild.toString().trim();
+    }
 }
