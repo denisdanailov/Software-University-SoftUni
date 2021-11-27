@@ -12,7 +12,7 @@ public class AlarmTest {
 
     @Before
     public void setUp() {
-        this.fakeSensor = Mockito.mock(Sensor.class);
+        fakeSensor = Mockito.mock(Sensor.class);
     }
 
     @Test
