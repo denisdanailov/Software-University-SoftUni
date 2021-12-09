@@ -78,6 +78,9 @@ public class ControllerImpl implements Controller {
         Mission mission = new MissionImpl();
 
         State state = stateRepo.byName(stateName);
+        if (state == null) {
+            throw new IllegalArgumentException("State doesn't exist in StateRepository");
+        }
 
         Collection<Explorer> explorers = new ArrayList<>();
         for (Explorer explorer : explorerRepo.getCollection()) {
