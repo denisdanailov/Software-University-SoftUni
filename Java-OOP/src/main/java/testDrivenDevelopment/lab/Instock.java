@@ -1,68 +1,133 @@
 package testDrivenDevelopment.lab;
 
-import jdk.jshell.spi.ExecutionControl;
-
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class  Instock implements ProductStock {
+public class Instock implements ProductStock {
+    private List<Product> inventory;
+
+    public Instock() {
+        this.inventory = new ArrayList<>();
+    }
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException();
+        return this.inventory.size();
     }
 
     @Override
     public boolean contains(Product product) {
-        throw new UnsupportedOperationException();
+        for (Product item : inventory) {
+            if (item.getLabel().equals(product.getLabel())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void add(Product product) {
-        throw new UnsupportedOperationException();
+        inventory.add(product);
     }
 
     @Override
     public void changeQuantity(String product, int quantity) {
-        throw new UnsupportedOperationException();
+        boolean isInStock = false;
+
+        for (Product item : this.inventory) {
+            if (item.getLabel().equals(product)) {
+                int currQuantity = item.getQuantity();
+
+                int remainingQuantity = currQuantity - quantity;
+                item.setQuantity(Math.max(remainingQuantity, 0));
+
+                isInStock = true;
+            }
+        }
+
+        if (!isInStock) {
+            throw new IllegalArgumentException("Product not in stock: " + product);
+        }
     }
 
     @Override
     public Product find(int index) {
-        throw new UnsupportedOperationException();
+        Product product = null;
+
+        if (this.inventory.size() > index) {
+            product = this.inventory.get(index);
+        } else {
+            throw new IndexOutOfBoundsException(String.format("Index %d not in bounds.", index));
+        }
+
+        return product;
     }
 
     @Override
     public Product findByLabel(String label) {
-        throw new UnsupportedOperationException();
+        Product product = null;
+
+        for (Product item : this.inventory) {
+            if (item.getLabel().equals(label)) {
+                product = item;
+            }
+        }
+
+        if (product == null) {
+            throw new IllegalArgumentException("Product not in stock. Label: " + label);
+        }
+
+        return product;
     }
 
     @Override
     public Iterable<Product> findFirstByAlphabeticalOrder(int count) {
-        throw new UnsupportedOperationException();
+        if (this.inventory.size() >= count) {
+            return this.inventory.stream()
+                    .sorted((a, b) -> a.getLabel().compareTo(b.getLabel()))
+                    .limit(count)
+                    .collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public Iterable<Product> findAllInRange(double lo, double hi) {
-        throw new UnsupportedOperationException();
+        return this.inventory.stream()
+                .filter(e -> e.getPrice() > lo && e.getPrice() <= hi)
+                .sorted((a, b) -> Double.compare(b.getPrice(), a.price))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Iterable<Product> findAllByPrice(double price) {
-        throw new UnsupportedOperationException();
+        return this.inventory.stream()
+                .filter(e -> e.getPrice() == price)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Iterable<Product> findFirstMostExpensiveProducts(int count) {
-        throw new UnsupportedOperationException();
+        if (count <= this.inventory.size()) {
+            return this.inventory.stream()
+                    .sorted((a, b) -> Double.compare(b.getPrice(), a.price))
+                    .limit(count)
+                    .collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public Iterable<Product> findAllByQuantity(int quantity) {
-        throw new UnsupportedOperationException();
+        return this.inventory.stream()
+                .filter(e -> e.getQuantity() == quantity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Iterator<Product> iterator() {
-        throw new UnsupportedOperationException();
+        return this.inventory.iterator();
     }
 }
