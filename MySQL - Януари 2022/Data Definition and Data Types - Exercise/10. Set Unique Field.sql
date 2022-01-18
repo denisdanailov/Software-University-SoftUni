@@ -1,0 +1,5 @@
+ALTER TABLE `users`
+DROP PRIMARY KEY,
+ADD CONSTRAINT `pk_users3`
+PRIMARY KEY `users`(`id`),
+CHANGE COLUMN `username` `username` VARCHAR(30) UNIQUE NOT NULL;
