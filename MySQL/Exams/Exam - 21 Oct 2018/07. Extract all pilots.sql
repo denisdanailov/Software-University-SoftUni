@@ -1,0 +1,1 @@
+select c.id, concat(c.first_name, ' ', c.last_name) as full_name from colonists as c join travel_cards as tc on tc.colonist_id = c.id where tc.job_during_journey = 'Pilot' order by c.id;
