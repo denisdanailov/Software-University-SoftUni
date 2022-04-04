@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<people>
+    <person>
+        <firstName>Pesho</firstName>
+        <lastName>Peshev</lastName>
+        <age>34</age>
+    </person>
+    <person>
+        <firstName>Vanko</firstName>
+        <lastName>Ivanov</lastName>
+        <age>26</age>
+    </person>
+    <person>
+        <firstName>Tisho</firstName>
+        <lastName>Tishev</lastName>
+        <age>39</age>
+    </person>
+    <person>
+        <firstName>Petur</firstName>
+        <lastName>Popyordanov</lastName>
+        <age>40</age>
+    </person>
+</people>
