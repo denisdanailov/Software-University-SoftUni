@@ -9,19 +9,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-  @GetMapping
+  @GetMapping("/newuser")
   public String newUser() {
     return "newuser";
   }
 
-  @PostMapping
-  public String createUser(UserDTO userDTO, Model model) {
 
-    System.out.println("Creating new user... " + userDTO);
+  @PostMapping("/newuser")
+  public String regUser(UserDTO userDTO, Model model) {
 
     model.addAttribute("newUser", userDTO);
 
     return "usercreated";
+  }
+
+  @PostMapping("/usercreated")
+  public String createUser(UserDTO userDTO, Model model) {
+
+
+    model.addAttribute("newUser", userDTO);
+
+    System.out.println("Creating new user... " + userDTO);
+
+    return "user/usercreated";
   }
 
   @ModelAttribute("newUser")
